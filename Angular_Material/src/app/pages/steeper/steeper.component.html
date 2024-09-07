@@ -1,0 +1,46 @@
+<mat-vertical-stepper [formGroup]="formGroup" linear>
+    <!-- Step 1: Fecha de nacimiento -->
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Fecha de nacimiento" formControlName="birthDate" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="firstFormGroup.get('birthDate')?.hasError('required')">
+            Fecha de nacimiento es requerida.
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.get('birthDate')?.hasError('matDatepickerMin')">
+            La fecha debe ser menor al día actual.
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </mat-step>
+  
+    <!-- Step 2: Nombre -->
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <mat-form-field>
+          <input matInput placeholder="Nombre" formControlName="name" required pattern="[A-Za-z]+">
+          <mat-error *ngIf="secondFormGroup.get('name')?.hasError('required')">
+            Nombre es requerido.
+          </mat-error>
+          <mat-error *ngIf="secondFormGroup.get('name')?.hasError('pattern')">
+            Solo se permiten letras.
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </mat-step>
+  
+    <!-- Step 3: DPI -->
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <mat-slide-toggle (change)="toggleDPI($event.checked)">DPI</mat-slide-toggle>
+        <mat-form-field *ngIf="showDPI">
+          <input matInput placeholder="Ingrese DPI" formControlName="dpi" required>
+          <mat-error *ngIf="thirdFormGroup.get('dpi')?.hasError('required')">
+            DPI es requerido.
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </mat-step>
+  </mat-vertical-stepper>

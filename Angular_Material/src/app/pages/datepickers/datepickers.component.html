@@ -1,0 +1,40 @@
+
+
+<div class="datepickers-container">
+    <div class="range">
+      <mat-form-field appearance="outline">
+        <mat-label>Rango de fechas</mat-label>
+        <mat-date-range-input [rangePicker]="rangePicker">
+          <input matStartDate placeholder="Fecha inicio">
+          <input matEndDate placeholder="Fecha fin">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+        <mat-date-range-picker #rangePicker></mat-date-range-picker>
+      </mat-form-field>
+    </div>
+    
+    <div class="max-min">
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha con min y max</mat-label>
+        <input matInput [matDatepicker]="minMaxPicker" [min]="minDate" [max]="maxDate" placeholder="Seleccione una fecha">
+        <mat-datepicker-toggle matSuffix [for]="minMaxPicker"></mat-datepicker-toggle>
+        <mat-datepicker #minMaxPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="month-year">
+        <mat-form-field>
+            <input matInput [matDatepicker]="monthPicker" placeholder="Seleccione mes y año">
+            <mat-datepicker-toggle matSuffix [for]="monthPicker"></mat-datepicker-toggle>
+            <mat-datepicker #monthPicker startView="year" panelClass="example-month-picker" (monthSelected)="chosenMonthHandler($event, monthPicker)"></mat-datepicker>
+          </mat-form-field>
+    </div>
+
+    <div class="formate">
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Mes Día, Año">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+    </div>
+</div>
